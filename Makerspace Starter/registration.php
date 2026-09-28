@@ -19,7 +19,34 @@
  */
 
 /*** STEP 1: Initialize the page and recognize a POST request. ***/
+$errors = [];
+$fullName = '';
+$email = '';
+$studentId = '';
+$workshop = '';
+$seats = '';
+$agreement = '';
+$submittedSuccessfully = false;
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $fullName = trim(filter_input(INPUT_POST, 'full_name') ?? '');
+    $email = trim(filter_input(INPUT_POST, 'email') ?? '');
+
+    $emailResult = filter_input(
+        INPUT_POST,
+        'email',
+        FILTER_VALIDATE_EMAIL
+    );
+    $studentId = strtoupper(
+        trim(filter_input(INPUT_POST,'student_id')?? '')
+    );
+    $workshop = filter_input(INPUT_POST, 'workshop') ?? '';
+    $seats = filter_input(INPUT_POST, 'seats') ?? '';
+    $agreement = filter_input(INPUT_POST, 'agreement') ?? '';
+    echo '<pre>';
+    var_dump($fullName, $email, $studentId, $workshop, $seats, $agreement);
+    echo '</pre>';
+}
 ?>
 <!doctype html>
 <html lang="en">
